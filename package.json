@@ -1,0 +1,27 @@
+{
+  "name": "meeting-spot-mixmax-app",
+  "version": "1.0.0",
+  "description": "Meeting Spot - Mixmax SDK integration",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon server.js",
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/roscalabrin/meeting-spot-mixmax-app.git"
+  },
+  "author": "Roberta Doyle",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/roscalabrin/meeting-spot-mixmax-app/issues"
+  },
+  "homepage": "https://github.com/roscalabrin/meeting-spot-mixmax-app#readme",
+  "dependencies": {
+    "express": "^4.14.0"
+  },
+  "devDependencies": {
+    "mocha": "^3.1.2",
+    "nodemon": "^1.11.0"
+  }
+}
