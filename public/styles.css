@@ -1,14 +1,15 @@
-html {
-  font-family: 'Lobster', cursive;
-}
-
 body {
   background-image: url('/img/coffee.png');
+  font-family: 'Josefin Sans', sans-serif;
 }
 
 .app-popup {
   margin-top: 20px;
   margin-left: 20px;
+}
+
+.title {
+  font-family: 'Lobster', cursive;
 }
 
 .location1-search, .location2-search {
@@ -23,14 +24,14 @@ body {
   border-left: none;
   border-bottom-style: solid;
   border-bottom-width: 1px;
-  border-bottom-color: #grey;
+  border-bottom-color: #000;
   background-color: transparent;
 }
 
 .search-locations {
   background-color: transparent;
   padding: 5px;
-  border-radius: 2px;
+  border-radius: 3px;
   border-style: solid;
   border-width: 1px;
   border-color: #105067;

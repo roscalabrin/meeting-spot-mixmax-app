@@ -1,7 +1,7 @@
 const express = require ('express')
 // const bodyParser = require('body-parser')
 const app = express()
-// const cors = require('cors')
+const cors = require('cors')
 
 app.set('port', process.env.PORT || 8910)
 
@@ -14,6 +14,7 @@ app.use(express.static(__dirname + '/public'))
 // }))
 
 // Since Mixmax calls this API directly from the client-side, it must be whitelisted.
+app.use(cors())
 // const corsOptions = {
 //   origin: /^[^.\s]+\.mixmax\.com$/,
 //   credentials: true
