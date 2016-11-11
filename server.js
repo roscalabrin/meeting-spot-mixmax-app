@@ -6,7 +6,7 @@ const app = express()
 app.set('port', process.env.PORT || 8910)
 
 // Serve assets in /public.
-// app.use(express.static(__dirname + '/public'))
+app.use(express.static(__dirname + '/public'))
 
 // So we can POST.
 // app.use(bodyParser.urlencoded({
@@ -20,13 +20,9 @@ app.set('port', process.env.PORT || 8910)
 // }
 
 // The editor interface.
-// app.get('/editor', (request, response) => {
-//   response.sendFile(path.join(__dirname + '/editor.html'))
-// })
-
-app.get('/', (request, response) => {
-  response.send('Hello World!');
-});
+app.get('/editor', (request, response) => {
+  response.sendFile(__dirname + '/editor.html')
+})
 
 // The in-email representation.
 // app.post('/api/resolver', cors(corsOptions), require('./api/resolver'))
