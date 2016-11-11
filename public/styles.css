@@ -1,3 +1,43 @@
+html {
+  font-family: 'Lobster', cursive;
+}
+
 body {
   background-image: url('/img/coffee.png');
+}
+
+.app-popup {
+  margin-top: 20px;
+  margin-left: 20px;
+}
+
+.location1-search, .location2-search {
+  padding: 2px;
+  margin-bottom: 10px;
+}
+
+.location1-search-field, .location2-search-field {
+  width: 250px;
+  height:25px;
+  border-top: none;
+  border-left: none;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: #grey;
+  background-color: transparent;
+}
+
+.search-locations {
+  background-color: transparent;
+  padding: 5px;
+  border-radius: 2px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #105067;
+  margin-top: 10px;
+}
+
+.search-locations:hover {
+  background-color: #105067;
+  color: #FFF;
 }
