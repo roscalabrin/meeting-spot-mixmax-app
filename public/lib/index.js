@@ -16,6 +16,7 @@ class Location {
       this.findCoord("location1", location1Formatted)
       this.findCoord("location2", location2Formatted)
       this.midPoint()
+      window.renderMap()
     })
   }
   
@@ -63,53 +64,8 @@ class Location {
     const lng = lng1 + Math.atan2(by, Math.cos(lat1) + bx);
     const midPointLat = lat / DEG_TO_RAD
     const midPointLng = lng / DEG_TO_RAD
-    this.findPlaces(midPointLat, midPointLng)
+    localStorage.setItem('center', `${midPointLat},${midPointLng}`)
+    console.log(lat)
+    console.log(lng)
   }
-  
-  findPlaces(lat, lng) {
-    // initMap(lat, lng)
-    // debugger
-    var map;
-    var infowindow;
-    var center = {lat: lat, lng: lng};
-    map = new google.maps.Map(document.getElementById('map'), {
-      center: center,
-      zoom: 15
-    });
-
-    var request = {
-      location: center,
-      radius: 2000,
-      type: ['cafe']
-    }
-    
-    infowindow = new google.maps.InfoWindow();
-    var service = new google.maps.places.PlacesService(map);
-    debugger
-    service.nearbySearch(request, callback);
-
-  function callback(results, status) {
-    debugger
-    if (status === google.maps.places.PlacesServiceStatus.OK) {
-      for (var i = 0; i < results.length; i++) {
-        createMarker(results[i]);
-      }
-    }
-  }
-
-  function createMarker(place) {
-    var placeLoc = place.geometry.location;
-    var marker = new google.maps.Marker({
-      map: map,
-      position: place.geometry.location
-    });
-
-    google.maps.event.addListener(marker, 'click', function() {
-      infowindow.setContent(place.name);
-      infowindow.open(map, this);
-    });
-  }
-    // document.getElementById('search-results').classList.remove('hide')
-  }
-
 } 
