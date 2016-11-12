@@ -29,7 +29,7 @@ class Location {
   }
   
   findCoord(place, locationFormatted) {
-  
+    const apiKey = 'AIzaSyBpLUwZpzkUP48Yz_9WWbly35G7W-8YiN8'
     $.ajax({
       type: "GET",
       url: `https://maps.googleapis.com/maps/api/geocode/json?address=${locationFormatted}&key=${apiKey}`,
@@ -43,7 +43,6 @@ class Location {
   }
   
   midPoint() {
-    // var midPoint = function(latitude1, longitude1, latitude2, longitude2) {
     const DEG_TO_RAD = Math.PI / 180;     // To convert degrees to radians.
     const latitude1 = localStorage.getItem('location1').split(',')[0].split(':')[1]
     const latitude2 = localStorage.getItem('location2').split(',')[0].split(':')[1]
@@ -62,10 +61,55 @@ class Location {
         Math.sin(lat1) + Math.sin(lat2),
         Math.sqrt((Math.cos(lat1) + bx) * (Math.cos(lat1) + bx) + by * by));
     const lng = lng1 + Math.atan2(by, Math.cos(lat1) + bx);
-    debugger
-    // lat / DEG_TO_RAD
-    // lng / DEG_TO_RAD
-    const array = []
+    const midPointLat = lat / DEG_TO_RAD
+    const midPointLng = lng / DEG_TO_RAD
+    this.findPlaces(midPointLat, midPointLng)
   }
   
-}
+  findPlaces(lat, lng) {
+    // initMap(lat, lng)
+    // debugger
+    var map;
+    var infowindow;
+    var center = {lat: lat, lng: lng};
+    map = new google.maps.Map(document.getElementById('map'), {
+      center: center,
+      zoom: 15
+    });
+
+    var request = {
+      location: center,
+      radius: 2000,
+      type: ['cafe']
+    }
+    
+    infowindow = new google.maps.InfoWindow();
+    var service = new google.maps.places.PlacesService(map);
+    debugger
+    service.nearbySearch(request, callback);
+
+  function callback(results, status) {
+    debugger
+    if (status === google.maps.places.PlacesServiceStatus.OK) {
+      for (var i = 0; i < results.length; i++) {
+        createMarker(results[i]);
+      }
+    }
+  }
+
+  function createMarker(place) {
+    var placeLoc = place.geometry.location;
+    var marker = new google.maps.Marker({
+      map: map,
+      position: place.geometry.location
+    });
+
+    google.maps.event.addListener(marker, 'click', function() {
+      infowindow.setContent(place.name);
+      infowindow.open(map, this);
+    });
+  }
+    // document.getElementById('search-results').classList.remove('hide')
+  }
+
+} 
