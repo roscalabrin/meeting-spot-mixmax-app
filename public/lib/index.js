@@ -1,23 +1,24 @@
 $(document).ready( () => {
-  new Location()
+  $('.search-locations').on('click', (e) => {
+    const location1 = $('.location1-search-field').val()
+    const location2 = $('.location2-search-field').val()
+    new Location(location1, location2)
+  })
 })
 
 class Location {
-  constructor() {
-    this.searchListener()
+  constructor(location1, location2) {
+    this.location1 = location1
+    this.location2 = location2
+    this.findMidPoint()
   }
   
-  searchListener() {
-    $('.search-locations').on('click', (e) => {
-      const location1 = $('.location1-search-field').val()
-      const location2 = $('.location2-search-field').val()
-      const location1Formatted = this.formatAddress(location1)
-      const location2Formatted = this.formatAddress(location2)
-      this.findCoord("location1", location1Formatted)
-      this.findCoord("location2", location2Formatted)
-      this.midPoint()
-      window.renderMap()
-    })
+  findMidPoint() {
+    const location1Formatted = this.formatAddress(this.location1)
+    const location2Formatted = this.formatAddress(this.location2)
+    this.findCoord("location1", location1Formatted)
+    this.findCoord("location2", location2Formatted)
+    this.midPoint()
   }
   
   formatAddress(address) {
