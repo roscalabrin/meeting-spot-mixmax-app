@@ -34,7 +34,6 @@
     </div>
     
     <div id="search-results">
-      <h2>Search Results</h2>
       <div id="map"></div>
     </div>
     
@@ -82,7 +81,6 @@
           autocomplete.setBounds(circle.getBounds())
         })
       }
-    }
 
     var request;
     var service;
@@ -110,23 +108,32 @@
         
         request = {
           location: center,
-          radius: 1000,
+          radius: 01,
           type: ['cafe']
         }
     
         infowindow = new google.maps.InfoWindow();
         service = new google.maps.places.PlacesService(map);
         service.nearbySearch(request, callback);
+        var centerControlDiv = document.createElement('div');
+        var centerControl = new CenterControl(centerControlDiv, map);
+
+        centerControlDiv.index = 1;
+        map.controls[google.maps.ControlPosition.TOP_CENTER].push(centerControlDiv);
       }
     
       function renderMap() {
-      // google.maps.event.addListener(map, 'rightclick', function(event) {
+      // google.maps.event.addListener(map, 'click', function(event)
+      //  {
+      // google.maps.event.addListener($(".search-locations"), 'click', function(event)
+      //  {
+        // $('.search-locations').on('click', (e) => {
         var lat = Number(localStorage.getItem('center').split(',')[0])
         var lng = Number(localStorage.getItem('center').split(',')[1])
         var center = {lat: lat, lng: lng}
         map.setCenter(center)
         clearResults(markers)
-        
+
         var request = {
           location: (center),
           radius: 1000,
@@ -165,6 +172,48 @@
         }
         markers = []
       }
+        
+      function CenterControl(controlDiv, map) {
+        // Set CSS for the control border.
+        var controlUI = document.createElement('div');
+        controlUI.style.backgroundColor = '#fff';
+        controlUI.style.border = '2px solid #fff';
+        controlUI.style.borderRadius = '3px';
+        controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
+        controlUI.style.cursor = 'pointer';
+        controlUI.style.marginBottom = '22px';
+        controlUI.style.textAlign = 'center';
+        controlUI.title = 'Click to recenter the map';
+        controlDiv.appendChild(controlUI);
+
+        // Set CSS for the control interior.
+        var controlText = document.createElement('div');
+        controlText.style.color = 'rgb(25,25,25)';
+        controlText.style.fontSize = '16px';
+        controlText.style.lineHeight = '38px';
+        controlText.style.paddingLeft = '5px';
+        controlText.style.paddingRight = '5px';
+        controlText.innerHTML = 'Find Coffee Shops';
+        controlUI.appendChild(controlText);
+
+        // Setup the click event listeners: simply set the map to Chicago.
+        controlUI.addEventListener('click', function() {
+          var lat = Number(localStorage.getItem('center').split(',')[0])
+          var lng = Number(localStorage.getItem('center').split(',')[1])
+          var center = {lat: lat, lng: lng}
+          map.setCenter(center)
+          clearResults(markers)
+    
+          var request = {
+            location: (center),
+            radius: 1000,
+            type: ['cafe']
+          }
+          service.nearbySearch(request, callback);
+        });
+
+      }
+
     </script>
 
   <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBpLUwZpzkUP48Yz_9WWbly35G7W-8YiN8&libraries=places&callback=initAutocomplete"

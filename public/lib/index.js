@@ -1,9 +1,25 @@
 $(document).ready( () => {
-  $('.search-locations').on('click', (e) => {
-    const location1 = $('.location1-search-field').val()
-    const location2 = $('.location2-search-field').val()
-    new Location(location1, location2)
-  })
+  localStorage.setItem('location1', '')
+  localStorage.setItem('location2', '')
+  localStorage.setItem('center', '')
+  // autocomplete.addListener('place_changed', function() {
+  //   debugger
+  //   // infowindow.close();
+  //   // marker.setVisible(false);
+  //   // var place = autocomplete.getPlace();
+  //   // if (!place.geometry) {
+  //   //   // User entered the name of a Place that was not suggested and
+  //   //   // pressed the Enter key, or the Place Details request failed.
+  //   //   window.alert("No details available for input: '" + place.name + "'");
+  //   //   return;
+  //   }
+  // }
+  // $('.search-locations').on('click', (e = '') => {
+  //   google.maps.event.trigger(markers[2], 'click');
+  //   const location1 = $('.location1-search-field').val()
+  //   const location2 = $('.location2-search-field').val()
+  //   new Location(location1, location2)
+  // })
 })
 
 class Location {
