@@ -12,6 +12,10 @@ body {
   font-family: 'Lobster', cursive;
 }
 
+.search {
+  margin-bottom: 50px;
+}
+
 .location1-search, .location2-search {
   padding: 2px;
   margin-bottom: 10px;
