@@ -34,6 +34,8 @@
     
     <div id="search-results">
       <div id="map"></div>
+      <h3 class="no-results hide"><strong>No results found.</storng> Try again changing one or both locations.</h3>
+      <h3 class="error-missing-location hide">Unable to search. You need to enter both locations.</h3>
     </div>
   </div>
 
@@ -158,6 +160,7 @@
     
     function callback(results, status) {
       if (status === google.maps.places.PlacesServiceStatus.ZERO_RESULTS) {
+        $('.no-results')[0].classList.remove('hide')
         console.log("no results found")
       } else if (status === google.maps.places.PlacesServiceStatus.OK) {
         for (var i = 0; i < results.length; i++) {
@@ -209,6 +212,17 @@
       controlUI.appendChild(controlText);
 
       controlUI.addEventListener('click', function() {
+        if ((localStorage.getItem('location1') === '') && (localStorage.getItem('location2') === '')) {
+          $('.error-missing-location')[0].classList.remove('hide')
+          console.log('both missing')
+        } else if ((localStorage.getItem('location1') === '') || (localStorage.getItem('location2') === '')) {
+          $('.error-missing-location')[0].classList.remove('hide')
+          console.log('one missing')
+        } else { calculateMidPoint() }
+      })
+    }
+      
+      function calculateMidPoint() {
         const DEG_TO_RAD = Math.PI / 180;     // To convert degrees to radians.
         const latitude1 = localStorage.getItem('location1').split(',')[0].split(':')[1]
         const latitude2 = localStorage.getItem('location2').split(',')[0].split(':')[1]
@@ -243,8 +257,7 @@
           type: ['cafe']
         }
         service.nearbySearch(request, callback);
-      })
-    }
+      }
     </script>
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBpLUwZpzkUP48Yz_9WWbly35G7W-8YiN8&libraries=places&callback=initialize"
