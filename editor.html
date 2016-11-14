@@ -35,7 +35,6 @@
     <div id="search-results">
       <div id="map"></div>
     </div>
-    
   </div>
 
   <script>
@@ -158,7 +157,9 @@
   }
     
     function callback(results, status) {
-      if (status === google.maps.places.PlacesServiceStatus.OK) {
+      if (status === google.maps.places.PlacesServiceStatus.ZERO_RESULTS) {
+        console.log("no results found")
+      } else if (status === google.maps.places.PlacesServiceStatus.OK) {
         for (var i = 0; i < results.length; i++) {
           markers.push(createMarker(results[i]))
         }
