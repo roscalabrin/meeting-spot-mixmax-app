@@ -143,7 +143,7 @@
     request = {
       location: center,
       radius: 01,
-      type: ['cafe']
+      type: ['cafe'] //not store
     }
 
     infowindow = new google.maps.InfoWindow()
@@ -174,10 +174,19 @@
       })
   
       google.maps.event.addListener(marker, 'click', function() {
-        infowindow.setContent(place.name);
-        infowindow.open(map, this);
+        service.getDetails(place, function(result) {
+          var contentData = `<div id="content">
+              <div><img class"img-icon" src=${result.icon} /></div>
+              <div class="place-details">
+                <h3>${result.name}</h3>
+                <p>${result.formatted_address}</p>
+                <p><a href=${result.website}>${result.website}</a></p>
+              <div>
+            </div>`
+          infowindow.setContent(contentData);
+          infowindow.open(map, marker);
+        })
       })
-      return marker
     }
     
     function clearResults(markers) {

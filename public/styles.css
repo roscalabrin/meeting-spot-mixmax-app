@@ -76,3 +76,12 @@ html, body {
 .hide {
   display: none;
 }
+
+.gm-style img {
+    max-width: 25;
+}
+
+.place-details {
+  font-size: 0.8em;
+  line-height: 0.9em;
+}
