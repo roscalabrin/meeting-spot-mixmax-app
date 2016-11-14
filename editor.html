@@ -129,7 +129,7 @@
   var markers = [];
 
   function initMap() {
-    var center = new google.maps.LatLng(37.422, -122.084058)
+    var center = new google.maps.LatLng(37.782769, -122.392745)
     map = new google.maps.Map(document.getElementById('map'), {
       center: center,
       zoom: 15,
@@ -143,7 +143,7 @@
     request = {
       location: center,
       radius: 01,
-      type: ['cafe'] //not store
+      type: ['cafe']
     }
 
     infowindow = new google.maps.InfoWindow()
@@ -161,7 +161,9 @@
         console.log("no results found")
       } else if (status === google.maps.places.PlacesServiceStatus.OK) {
         for (var i = 0; i < results.length; i++) {
-          markers.push(createMarker(results[i]))
+          if (results[i].types.includes('store') === false) {
+            markers.push(createMarker(results[i]))
+          }
         }
       }
     }
