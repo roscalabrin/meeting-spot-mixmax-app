@@ -149,7 +149,7 @@
 
     infowindow = new google.maps.InfoWindow()
     service = new google.maps.places.PlacesService(map)
-    service.nearbySearch(request, callback)
+    service.nearbySearch(request, function(){})
     var centerControlDiv = document.createElement('div')
     var centerControl = new CenterControl(centerControlDiv, map)
 
@@ -160,8 +160,11 @@
     function callback(results, status) {
       if (status === google.maps.places.PlacesServiceStatus.ZERO_RESULTS) {
         $('.no-results')[0].classList.remove('hide')
-        console.log("no results found")
+        $('.error-missing-location')[0].classList.add('hide')
+        console.log('no results')
       } else if (status === google.maps.places.PlacesServiceStatus.OK) {
+        $('.error-missing-location')[0].classList.add('hide')
+        $('.no-results')[0].classList.add('hide')
         for (var i = 0; i < results.length; i++) {
           if (results[i].types.includes('store') === false) {
             markers.push(createMarker(results[i]))
