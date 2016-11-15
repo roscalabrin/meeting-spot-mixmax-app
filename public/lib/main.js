@@ -1,11 +1,11 @@
 function initialize() {
-  initAutocomplete();
-  initMap();
+  initAutocomplete()
+  initMap()
 }
 
-var autocomplete
-var autocomplete2
-var componentForm = {
+let autocomplete
+let autocomplete2
+const componentForm = {
   street_number: 'short_name',
   route: 'long_name',
   locality: 'long_name',
@@ -33,12 +33,12 @@ function initAutocomplete() {
 
 function geolocate() {
   if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(function(position) {
-      var geolocation = {
+    navigator.geolocation.getCurrentPosition((position) => {
+      const geolocation = {
         lat: position.coords.latitude,
         lng: position.coords.longitude
       }
-      var circle = new google.maps.Circle({
+      const circle = new google.maps.Circle({
         center: geolocation,
         radius: position.coords.accuracy
       })
@@ -47,9 +47,9 @@ function geolocate() {
   }
 }
 
-var request;
-var service;
-var markers = [];
+let request
+let service
+const markers = []
 
 function initMap() {
   const center = new google.maps.LatLng(37.782769, -122.392745)
@@ -104,7 +104,7 @@ function initMap() {
   }
 
   function createMarker(place) {
-    const placeLoc = place.geometry.location;
+    const placeLoc = place.geometry.location
     const marker = new google.maps.Marker({
       map: map,
       position: place.geometry.location
@@ -112,19 +112,37 @@ function initMap() {
 
     google.maps.event.addListener(marker, 'click', () => {
       service.getDetails(place, (result) => {
-        const contentData = `<div id="content">
+        const contentData = `<div class="place-details">
             <div><img class"img-icon" src=${result.icon} /></div>
-            <div class="place-details">
               <h3>${result.name}</h3>
               <p>${result.formatted_address}</p>
-              <p><a href=${result.website}>${result.website}</a></p>
-            <div>
+              <p><a href=${checkWebsite(result)}>${checkWebsite(result)}</a></p>
+              <button class="select" onClick="_done()">SELECT</button>
           </div>`
-        infowindow.setContent(contentData);
-        infowindow.open(map, marker);
+        function checkWebsite(result) {
+          if (result.website === undefined) { 
+            return ''
+          } else { return result.website }
+        }
+        infowindow.setContent(contentData)
+        infowindow.open(map, marker)
       })
     })
   }
+  
+  function _done() {
+  debugger
+    // $('.place-details')[0]
+    // Let Mixmax know it was done.
+    Mixmax.done({
+      src: gif,
+      width: width
+    });
+  }
+
+  // _cancel: function() {
+  //   Mixmax.cancel();
+  // },
   
   function clearResults(markers) {
     for (var m in markers) {
@@ -136,14 +154,14 @@ function initMap() {
   }
       
   function CenterControl(controlDiv, map) {
-    const controlUI = document.createElement('div');
+    const controlUI = document.createElement('div')
     controlUI.className = 'search-btn'
-    controlUI.title = 'Click to find search coffee shops';
-    controlDiv.appendChild(controlUI);
+    controlUI.title = 'Click to find search coffee shops'
+    controlDiv.appendChild(controlUI)
 
-    const controlText = document.createElement('div');
-    controlText.innerHTML = 'Find Coffee Shops';
-    controlUI.appendChild(controlText);
+    const controlText = document.createElement('div')
+    controlText.innerHTML = 'Find Coffee Shops'
+    controlUI.appendChild(controlText)
 
     $('#map').on('click', '.search-btn', (e) => {
       const invalidInput = checkForInvalidInput()
@@ -166,24 +184,24 @@ function initMap() {
       if (invalidInput === false) {
         $('.no-results')[0].classList.add('hide')
         $('.error-missing-location')[0].classList.add('hide')
-        const DEG_TO_RAD = Math.PI / 180;     // To convert degrees to radians.
+        const DEG_TO_RAD = Math.PI / 180 // To convert degrees to radians.
         const latitude1 = localStorage.getItem('location1').split(',')[0].split(':')[1]
         const latitude2 = localStorage.getItem('location2').split(',')[0].split(':')[1]
         const longitude1 = localStorage.getItem('location1').split(',')[1].split(':')[1]
         const longitude2 = localStorage.getItem('location2').split(',')[1].split(':')[1]
         // Convert latitude and longitudes to radians:
-        const lat1 = latitude1 * DEG_TO_RAD;
-        const lat2 = latitude2 * DEG_TO_RAD;
-        const lng1 = longitude1 * DEG_TO_RAD;
-        const dLng = (longitude2 - longitude1) * DEG_TO_RAD;  // Diff in longtitude.
+        const lat1 = latitude1 * DEG_TO_RAD
+        const lat2 = latitude2 * DEG_TO_RAD
+        const lng1 = longitude1 * DEG_TO_RAD
+        const dLng = (longitude2 - longitude1) * DEG_TO_RAD // Diff in longtitude.
      
         // Calculate mid-point:
-        const bx = Math.cos(lat2) * Math.cos(dLng);
-        const by = Math.cos(lat2) * Math.sin(dLng);
+        const bx = Math.cos(lat2) * Math.cos(dLng)
+        const by = Math.cos(lat2) * Math.sin(dLng)
         const latitude = Math.atan2(
             Math.sin(lat1) + Math.sin(lat2),
-            Math.sqrt((Math.cos(lat1) + bx) * (Math.cos(lat1) + bx) + by * by));
-        const longitude = lng1 + Math.atan2(by, Math.cos(lat1) + bx);
+            Math.sqrt((Math.cos(lat1) + bx) * (Math.cos(lat1) + bx) + by * by))
+        const longitude = lng1 + Math.atan2(by, Math.cos(lat1) + bx)
         const midPointLat = latitude / DEG_TO_RAD
         const midPointLng = longitude / DEG_TO_RAD
         localStorage.setItem('center', `${midPointLat},${midPointLng}`)
@@ -199,6 +217,6 @@ function initMap() {
           radius: 900,
           type: ['cafe']
         }
-        service.nearbySearch(request, callback);
+        service.nearbySearch(request, callback)
       }
     }

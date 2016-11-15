@@ -89,3 +89,11 @@ html, body {
 .no-results, .error-missing-location {
   color: #CC0066;
 }
+
+.select {
+  background-color: #105067;
+  border: 2px solid #105067;
+  border-radius: 3px;
+  color: #FFF;
+  float: right;
+}
