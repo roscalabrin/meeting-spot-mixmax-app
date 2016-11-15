@@ -157,12 +157,11 @@
   }
     
     function callback(results, status) {
-      if (status === google.maps.places.PlacesServiceStatus.ZERO_RESULTS) {
+      var filteredResults = results.filter(isNotStore)
+      if ((status === google.maps.places.PlacesServiceStatus.ZERO_RESULTS) || (filteredResults === [])) {
         $('.no-results')[0].classList.remove('hide')
         $('.error-missing-location')[0].classList.add('hide')
-        console.log('no results')
       } else if (status === google.maps.places.PlacesServiceStatus.OK) {
-        debugger
         $('.error-missing-location')[0].classList.add('hide')
         $('.no-results')[0].classList.add('hide')
         for (var i = 0; i < results.length; i++) {
@@ -171,6 +170,10 @@
           }
         }
       }
+    }
+    
+    function isNotStore(placeObject) {
+      return placeObject.types.includes('store') === false
     }
   
     function createMarker(place) {
@@ -198,7 +201,9 @@
     
     function clearResults(markers) {
       for (var m in markers) {
-        markers[m].setMap(null)
+        if (markers[m] !== undefined) {
+          markers[m].setMap(null)
+        }
       }
       markers = []
     }
