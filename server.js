@@ -11,7 +11,7 @@ app.use(bodyParser.urlencoded({
   extended: true
 }))
 
-app.use(cors())
+// app.use(cors())
 
 const corsOptions = {
   origin: /^[^.\s]+\.mixmax\.com$/,

@@ -90,9 +90,17 @@ html, body {
   color: #CC0066;
 }
 
+.website a {
+  color: #105067;
+  text-decoration: none;
+}
+.website a:hover {
+  font-weight: 1.5em
+}
+
 .select {
-  background-color: #105067;
-  border: 2px solid #105067;
+  background-color: #8d12a7;
+  border: 1px solid #8d12a7;
   border-radius: 3px;
   color: #FFF;
   float: right;

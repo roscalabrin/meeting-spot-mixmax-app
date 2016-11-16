@@ -116,7 +116,7 @@ function initMap() {
             <div><img class"img-icon" src=${result.icon} /></div>
               <h3>${result.name}</h3>
               <p>${result.formatted_address}</p>
-              <p><a href=${checkWebsite(result)}>${checkWebsite(result)}</a></p>
+              <p class="website"><a href=${checkWebsite(result)}>${checkWebsite(result)}</a></p>
               <button class="select" onClick="_done()">SELECT</button>
           </div>`
         function checkWebsite(result) {
@@ -131,13 +131,17 @@ function initMap() {
   }
   
   function _done() {
-  debugger
-    // $('.place-details')[0]
     // Let Mixmax know it was done.
-    Mixmax.done({
-      src: gif,
-      width: width
-    });
+    // const name = $('.place-details')[0]
+    // const website = $('.place-details')[0]
+    // debugger
+    // Mixmax.done({
+    //   name: 'CA'
+    //   website: 'CA'
+    // });
+    // Mixmax.done({
+    //   width: 100
+    // });
   }
 
   // _cancel: function() {
