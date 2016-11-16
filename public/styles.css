@@ -12,6 +12,10 @@ body {
   font-family: 'Lobster', cursive;
 }
 
+.search {
+  margin-bottom: 50px;
+}
+
 .location1-search, .location2-search {
   padding: 2px;
   margin-bottom: 10px;
@@ -26,6 +30,22 @@ body {
   border-bottom-width: 1px;
   border-bottom-color: #000;
   background-color: transparent;
+}
+
+.search-btn {
+  float: left;
+  color: #FFF;
+  font-size: 16px;
+  line-height: 38px;
+  padding-left: 5px;
+  padding-right: 5px;  
+  background-color: #105067;
+  border: 2px solid #105067;
+  border-radius: 3px;
+  box-shadow: 0 2px 6px rgba(0,0,0,.3);
+  cursor: pointer;
+  margin-bottom: 22px;
+  text-align: center;
 }
 
 .search-locations {
@@ -55,4 +75,33 @@ html, body {
 
 .hide {
   display: none;
+}
+
+.gm-style img {
+    max-width: 25;
+}
+
+.place-details {
+  font-size: 0.8em;
+  line-height: 0.9em;
+}
+
+.no-results, .error-missing-location {
+  color: #CC0066;
+}
+
+.website a {
+  color: #105067;
+  text-decoration: none;
+}
+.website a:hover {
+  font-weight: 1.5em
+}
+
+.select {
+  background-color: #8d12a7;
+  border: 1px solid #8d12a7;
+  border-radius: 3px;
+  color: #FFF;
+  float: right;
 }
