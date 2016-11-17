@@ -2,6 +2,8 @@
 
 This is an open source Mixmax Enhancement.
 
+It allows users to enter 2 different locations and find coffee spots that are located half way between locations.
+
 ![pop-up image](public/img/middlemax-pop-up.png)
 
 ## Running locally
