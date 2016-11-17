@@ -132,21 +132,15 @@ function initMap() {
   
   function _done() {
     // Let Mixmax know it was done.
-    // const name = $('.place-details')[0]
-    // const website = $('.place-details')[0]
-    // debugger
-    // Mixmax.done({
-    //   name: 'CA'
-    //   website: 'CA'
-    // });
-    // Mixmax.done({
-    //   width: 100
-    // });
+    Mixmax.done({
+      name: $('.place-details h3')[0].innerHTML,
+      website: $('.place-details .website a')[0].text
+    })
   }
 
-  // _cancel: function() {
-  //   Mixmax.cancel();
-  // },
+  function _cancel () {
+    Mixmax.cancel();
+  }
   
   function clearResults(markers) {
     for (var m in markers) {

@@ -11,8 +11,7 @@ app.use(bodyParser.urlencoded({
   extended: true
 }))
 
-// app.use(cors())
-
+// Since Mixmax calls this API directly from the client-side, it must be whitelisted.
 const corsOptions = {
   origin: /^[^.\s]+\.mixmax\.com$/,
   credentials: true

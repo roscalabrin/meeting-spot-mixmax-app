@@ -18,8 +18,9 @@
   },
   "homepage": "https://github.com/roscalabrin/meeting-spot-mixmax-app#readme",
   "dependencies": {
-    "express": "^4.14.0",
-    "yelp": "^1.0.1"
+    "body-parser": "^1.15.2",
+    "cors": "^2.8.1",
+    "express": "^4.14.0"
   },
   "devDependencies": {
     "mocha": "^3.1.2",
